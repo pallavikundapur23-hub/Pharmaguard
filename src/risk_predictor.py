@@ -12,6 +12,7 @@ from src.gene_models import GENOTYPE_PHENOTYPE_MAP, Phenotype, RiskLevel
 from src.drug_mapping import get_drug_recommendations
 from src.genotype_phenotype import GenotypePhenotypeConverter
 from src.phenotype_risk_mapper import PhenotypeRiskPredictor
+from src.llm_explainer import LLMExplainer # Import the new LLM Explainer
 
 
 class RiskPredictor:
@@ -22,6 +23,15 @@ class RiskPredictor:
         # Initialize advanced converters
         self.phenotype_converter = GenotypePhenotypeConverter()
         self.risk_predictor = PhenotypeRiskPredictor()
+        
+        # Initialize LLM Explainer with error handling
+        try:
+            self.llm_explainer = LLMExplainer()
+            self.llm_available = True
+        except Exception as e:
+            print(f"Warning: LLM initialization failed: {e}")
+            self.llm_explainer = None
+            self.llm_available = False
     
     def genotype_string_to_alleles(self, gt_string: str) -> Optional[Tuple[str, str]]:
         """
@@ -219,7 +229,7 @@ class RiskPredictor:
         }
     
     def _generate_json_output(self, genotypes, phenotypes, drug_risks, detailed_risks=None) -> str:
-        """Generate comprehensive JSON output with CPIC guidelines and detailed phenotype-risk mapping"""
+        """Generate comprehensive JSON output with CPIC guidelines, LLM explanations, and detailed phenotype-risk mapping"""
         
         # Initialize detailed_risks if not provided
         if detailed_risks is None:
@@ -249,17 +259,21 @@ class RiskPredictor:
             # Find primary gene for this drug (first detected gene)
             primary_gene = None
             diplotype = None
+            primary_genotype = None
             for gene, genotype in genotypes.items():
                 if genotype and gene in ["CYP2D6", "CYP2C19", "CYP2C9", "TPMT", "SLC01B1", "DPYD"]:
                     primary_gene = gene
+                    primary_genotype = genotype
                     diplotype = f"{genotype[0]}/{genotype[1]}" if genotype else "*1/*1"
                     break
             
             # Get phenotype value
             primary_phenotype = "Unknown"
+            phenotype_obj = None
             if primary_gene and primary_gene in phenotypes:
                 pheno = phenotypes[primary_gene]
                 if pheno:
+                    phenotype_obj = pheno
                     # Map phenotype to abbreviation
                     pheno_map = {
                         "Ultra-Rapid Metabolizer": "URM",
@@ -271,16 +285,33 @@ class RiskPredictor:
                     }
                     primary_phenotype = pheno_map.get(pheno.value, "Unknown")
             
-            # Build detected variants
+            # Build detected variants with LLM explanations
             detected_variants = []
             for gene, genotype in genotypes.items():
                 if genotype:
-                    detected_variants.append({
+                    variant_entry = {
                         "rsid": f"rs{hash(str(genotype)) % 10000000}",
                         "gene": gene,
                         "genotype": f"{genotype[0]}/{genotype[1]}",
                         "phenotype": phenotypes.get(gene).value if gene in phenotypes and phenotypes[gene] else "Unknown",
-                    })
+                    }
+                    
+                    # Add LLM explanation for this variant if available
+                    if self.llm_available and phenotypes.get(gene):
+                        try:
+                            variant_exp = self.llm_explainer.get_variant_explanation(
+                                gene=gene,
+                                diplotype=f"{genotype[0]}/{genotype[1]}",
+                                phenotype=phenotypes[gene].value,
+                                activity_score=getattr(phenotypes[gene], 'activity_score', 1.0)
+                            )
+                            if variant_exp.get('status') == 'success':
+                                variant_entry['llm_explanation'] = variant_exp['summary']
+                                variant_entry['llm_cached'] = variant_exp.get('from_cache', False)
+                        except Exception as e:
+                            pass  # Skip if LLM unavailable
+                    
+                    detected_variants.append(variant_entry)
             
             # Get detailed CPIC risk if available
             detailed_risk_data = detailed_risks.get(drug, {})
@@ -294,7 +325,83 @@ class RiskPredictor:
                 dose_adjustment = f"{details.get('dose_adjustment', 0)}% adjustment"
                 cpic_evidence = details.get("cpic_evidence", "No data")
             
-            # Build the entry with comprehensive CPIC data
+            # Generate LLM explanations
+            llm_explanation_data = {
+                "summary": f"Based on genetic profile, {drug} shows {risk_level.lower()} risk.",
+                "clinical_impact": risk_rec.get('explanation', ''),
+                "llm_used": False,
+                "llm_provider": None,
+                "llm_model": None,
+                "llm_cached": False,
+            }
+            
+            variant_interpretation = ""
+            risk_explanation = ""
+            dosing_recommendation = "Consult pharmacist"
+            monitoring_guidance = risk_rec.get('monitoring', '')
+            
+            # Get LLM explanations if available
+            if self.llm_available and primary_gene and phenotype_obj:
+                try:
+                    # Get variant interpretation
+                    variant_exp = self.llm_explainer.get_variant_explanation(
+                        gene=primary_gene,
+                        diplotype=diplotype or "*1/*1",
+                        phenotype=phenotype_obj.value,
+                        activity_score=getattr(phenotype_obj, 'activity_score', 1.0)
+                    )
+                    
+                    if variant_exp.get('status') == 'success':
+                        variant_interpretation = variant_exp['summary']
+                        llm_explanation_data['llm_used'] = True
+                        llm_explanation_data['llm_cached'] = variant_exp.get('from_cache', False)
+                        # Get provider info from explainer
+                        if hasattr(self.llm_explainer, 'provider'):
+                            llm_explanation_data['llm_provider'] = self.llm_explainer.provider.upper()
+                        if hasattr(self.llm_explainer, 'model'):
+                            llm_explanation_data['llm_model'] = self.llm_explainer.model
+                    
+                    # Get risk explanation
+                    risk_exp = self.llm_explainer.get_risk_explanation(
+                        drug=drug,
+                        gene=primary_gene,
+                        phenotype=phenotype_obj.value,
+                        risk_level=risk_level,
+                        clinical_guidance=risk_rec.get('clinical_guidance', f"Standard CPIC guidance for {drug}")
+                    )
+                    
+                    if risk_exp.get('status') == 'success':
+                        risk_explanation = risk_exp['summary']
+                        llm_explanation_data['llm_used'] = True
+                        llm_explanation_data['llm_cached'] = risk_exp.get('from_cache', False)
+                    
+                    # Get dosing adjustment
+                    dosing_exp = self.llm_explainer.get_dosing_adjustment(
+                        drug=drug,
+                        phenotype=phenotype_obj.value,
+                        gene=primary_gene,
+                        standard_dose="Unknown",
+                        risk_level=risk_level
+                    )
+                    
+                    if dosing_exp.get('status') == 'success':
+                        dosing_recommendation = dosing_exp['summary']
+                    
+                    # Get monitoring guidance
+                    monitor_exp = self.llm_explainer.get_phenotype_interpretation(
+                        gene=primary_gene,
+                        phenotype=phenotype_obj.value,
+                        activity_score=getattr(phenotype_obj, 'activity_score', 1.0)
+                    )
+                    
+                    if monitor_exp.get('status') == 'success':
+                        monitoring_guidance = monitor_exp['summary']
+                        
+                except Exception as e:
+                    # If LLM fails, continue with fallback
+                    pass
+            
+            # Build the entry with comprehensive CPIC data and LLM explanations
             drug_entry = {
                 "patient_id": patient_id,
                 "drug": drug,
@@ -319,12 +426,16 @@ class RiskPredictor:
                 },
                 "clinical_recommendation": {
                     "summary": detailed_recommendation or risk_rec.get('explanation', ''),
-                    "dosing": dose_adjustment or risk_rec.get('dosing_recommendation', ''),
-                    "monitoring": detailed_risk_data.get("details", {}).get("monitoring", risk_rec.get('monitoring', '')),
+                    "dosing": dosing_recommendation if dosing_recommendation != "Consult pharmacist" else dose_adjustment or risk_rec.get('dosing_recommendation', ''),
+                    "monitoring": monitoring_guidance or risk_rec.get('monitoring', ''),
                 },
                 "llm_generated_explanation": {
-                    "summary": f"Based on genetic profile, {drug} shows {risk_level.lower()} risk.",
-                    "clinical_impact": risk_rec.get('explanation', ''),
+                    "variant_interpretation": variant_interpretation,
+                    "risk_explanation": risk_explanation,
+                    "clinical_impact": f"{primary_gene} ({primary_phenotype}): {risk_level}",
+                    "dosing_recommendation": dosing_recommendation,
+                    "monitoring_guidance": monitoring_guidance,
+                    "source": f"{llm_explanation_data['llm_provider']} LLM ({llm_explanation_data['llm_model']})" if llm_explanation_data['llm_used'] else "Rule-based fallback"
                 },
                 "quality_metrics": {
                     "vcf_parsing_success": True,
@@ -332,6 +443,11 @@ class RiskPredictor:
                     "variant_count": len([g for g in genotypes.values() if g]),
                     "data_completeness": "standard",
                     "algorithm_version": "CPIC-aligned-v2",
+                    "llm_used": llm_explanation_data['llm_used'],
+                    "llm_provider": llm_explanation_data['llm_provider'],
+                    "llm_model": llm_explanation_data['llm_model'],
+                    "llm_cached": llm_explanation_data['llm_cached'],
+                    "explanation_quality": "comprehensive" if llm_explanation_data['llm_used'] else "rule-based"
                 },
             }
             

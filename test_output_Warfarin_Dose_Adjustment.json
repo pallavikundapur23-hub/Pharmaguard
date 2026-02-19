@@ -1,0 +1,98 @@
+[
+  {
+    "patient_id": "PATIENT_355BF81D",
+    "drug": "Warfarin",
+    "timestamp": "2026-02-19T16:51:46.711577",
+    "risk_assessment": {
+      "risk_label": "Unknown",
+      "confidence_score": 0.5,
+      "severity": "none"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "No data",
+      "strength_of_recommendation": "Moderate",
+      "clinical_guidance": "",
+      "cpic_evidence": "No data",
+      "reference": "Manual review required"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2C19",
+      "diplotype": "*1/*2",
+      "phenotype": "IM",
+      "detected_variants": [
+        {
+          "rsid": "rs3288976",
+          "gene": "CYP2C19",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "CYP2C9: No variant data available | VKORC1: No variant data available",
+      "dosing": "Standard dosing",
+      "monitoring": "Monitor for adverse effects; adjust if needed"
+    },
+    "llm_generated_explanation": {
+      "summary": "Based on genetic profile, Warfarin shows unknown risk.",
+      "clinical_impact": "CYP2C9: No variant data available | VKORC1: No variant data available"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": [
+        "CYP2C19"
+      ],
+      "variant_count": 1,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2"
+    }
+  },
+  {
+    "patient_id": "PATIENT_355BF81D",
+    "drug": "Clopidogrel",
+    "timestamp": "2026-02-19T16:51:46.711577",
+    "risk_assessment": {
+      "risk_label": "Adjust Dosage",
+      "confidence_score": 0.95,
+      "severity": "moderate"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "2B",
+      "strength_of_recommendation": "Moderate",
+      "clinical_guidance": "Intermediate metabolizers have reduced antiplatelet effect; may not achieve therapeutic levels.",
+      "cpic_evidence": "2B - Moderate",
+      "reference": "CPIC Clopidogrel/CYP2C19 Guidelines"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2C19",
+      "diplotype": "*1/*2",
+      "phenotype": "IM",
+      "detected_variants": [
+        {
+          "rsid": "rs3288976",
+          "gene": "CYP2C19",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Consider alternative P2Y12 inhibitor (prasugrel 5-10 mg daily or ticagrelor 60-90 mg daily) OR increase clopidogrel to 150 mg daily",
+      "dosing": "200% increase (150 mg) if continuing clopidogrel% adjustment",
+      "monitoring": "Assess antiplatelet response; platelet function testing helpful; higher stent thrombosis risk"
+    },
+    "llm_generated_explanation": {
+      "summary": "Based on genetic profile, Clopidogrel shows adjust dosage risk.",
+      "clinical_impact": "CYP2C19 (Intermediate Metabolizer): Adjust Dosage"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": [
+        "CYP2C19"
+      ],
+      "variant_count": 1,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2"
+    }
+  }
+]

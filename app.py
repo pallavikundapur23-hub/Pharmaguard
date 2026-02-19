@@ -449,6 +449,71 @@ def analyze_vcf(uploaded_file, drugs):
         
         st.markdown("---")
         
+        # Detailed CPIC-Aligned Risk Predictions
+        if results.get('detailed_risks'):
+            st.markdown("### 🔬 Detailed CPIC-Aligned Risk Predictions")
+            st.markdown("*Enhanced phenotype-based risk assessment with clinical guidance*")
+            
+            for drug, detailed_risk in results['detailed_risks'].items():
+                if "error" not in detailed_risk or not detailed_risk.get("error"):
+                    try:
+                        gene = detailed_risk.get("gene", "Unknown")
+                        phenotype = detailed_risk.get("phenotype", "Unknown")
+                        risk_level = detailed_risk.get("risk_level", "Unknown")
+                        details = detailed_risk.get("details", {})
+                        
+                        # Color coding for risk levels
+                        risk_colors = {
+                            "SAFE": "🟢",
+                            "ADJUST_DOSAGE": "🟡",
+                            "INEFFECTIVE": "🟠",
+                            "TOXIC": "🔴",
+                            "UNKNOWN": "⚪"
+                        }
+                        
+                        risk_emoji = risk_colors.get(risk_level, "⚪")
+                        
+                        with st.expander(f"{risk_emoji} **{drug}** ({gene} → {phenotype})", expanded=False):
+                            col1, col2 = st.columns([1, 1])
+                            
+                            with col1:
+                                st.markdown(f"**Gene**: `{gene}`")
+                                st.markdown(f"**Phenotype**: `{phenotype}`")
+                                st.markdown(f"**Risk Level**: `{risk_level.replace('_', ' ')}`")
+                                
+                                if details.get("dose_adjustment") is not None:
+                                    dose_adj = details.get("dose_adjustment", 0)
+                                    if dose_adj == 0:
+                                        st.markdown(f"**Dose Adjustment**: ⛔ Do not use")
+                                    elif dose_adj > 100:
+                                        st.markdown(f"**Dose Adjustment**: ⬆️ +{dose_adj-100}% increase")
+                                    elif dose_adj < 100:
+                                        st.markdown(f"**Dose Adjustment**: ⬇️ {100-dose_adj}% reduction")
+                                    else:
+                                        st.markdown(f"**Dose Adjustment**: → Standard dosing")
+                            
+                            with col2:
+                                if details.get("cpic_evidence"):
+                                    st.markdown(f"**CPIC Evidence**: `{details.get('cpic_evidence')}`")
+                                
+                                if details.get("reason"):
+                                    st.markdown("**Clinical Reasoning**:")
+                                    st.info(details.get("reason"))
+                            
+                            # Detailed recommendation
+                            if details.get("recommendation"):
+                                st.markdown("**CPIC Recommendation**:")
+                                st.success(details.get("recommendation"))
+                            
+                            # Monitoring requirements
+                            if details.get("monitoring"):
+                                st.markdown("**Monitoring Requirements**:")
+                                st.warning(details.get("monitoring"))
+                    except Exception as e:
+                        st.write(f"Details for {drug}: {detailed_risk}")
+            
+            st.markdown("---")
+        
         # JSON Output
         st.markdown("### 📄 Structured Output (JSON)")
         json_data = json.loads(results['json_output'])

@@ -1,0 +1,308 @@
+[
+  {
+    "patient_id": "PATIENT_1BE04F09",
+    "drug": "Codeine",
+    "timestamp": "2026-02-19T21:17:33.234650",
+    "risk_assessment": {
+      "risk_label": "Adjust Dosage",
+      "confidence_score": 0.95,
+      "severity": "moderate"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "2A",
+      "strength_of_recommendation": "Moderate",
+      "clinical_guidance": "Reduced metabolism leads to lower morphine conversion (10-20% reduction).",
+      "cpic_evidence": "2A - Moderate",
+      "reference": "PharmGKB CPIC Codeine/CYP2D6"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2D6",
+      "diplotype": "*1/*2",
+      "phenotype": "IM",
+      "detected_variants": [
+        {
+          "rsid": "rs3962172",
+          "gene": "CYP2D6",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer",
+          "llm_explanation": "The 'CYP2D6' gene helps your body process certain medications. Your genetic profile shows a diplotype of *1/*2, meaning you have one normal and one slightly less active copy of the gene. This results in an Intermediate Metabolizer phenotype and an Activity Score of 1.00. The activity score indicates your body's ability to process drugs is moderately reduced. As an Intermediate Metabolizer, your body processes certain medications at a slower rate than normal, but faster than those with poor metabolism. This may affect how you respond to certain medications, and your doctor may need to adjust doses to ensure safe and effective treatment.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "CYP2C19",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer",
+          "llm_explanation": "The 'CYP2C19' gene diplotype *1/*2 indicates you have one normal gene and one variant gene. This combination results in an Intermediate Metabolizer phenotype. The Activity Score of 1.00 confirms this. As an Intermediate Metabolizer, you break down certain medications at a rate between normal and slow. This means you may process some drugs slightly faster than slow metabolizers, but slower than normal metabolizers. In general, this can lead to variable responses to certain medications, and your doctor may need to adjust dosages to achieve the best results. It's essential to discuss your genetic profile with your healthcare provider to ensure safe and effective treatment.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "CYP2C9",
+          "genotype": "*1/*2",
+          "phenotype": "Normal Metabolizer",
+          "llm_explanation": "The 'CYP2C9' gene diplotype *1/*2 indicates you have one normal copy and one slightly less active copy of the gene. Your phenotype is a Normal Metabolizer, meaning your body processes certain medications at a typical rate. The Activity Score of 1.00 confirms this, indicating your enzyme activity is average. As a Normal Metabolizer, you're likely to process medications faster than someone with a slower metabolism, but not as fast as someone with a faster metabolism. This means you may respond to medications as expected, without increased risk of side effects or reduced effectiveness. Your doctor can use this information to choose the right medications and doses for you.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "TPMT",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer",
+          "llm_explanation": "The 'TPMT' gene diplotype *1/*2 indicates you have one normal and one slightly altered copy of the gene. This combination results in an Intermediate Metabolizer phenotype. The Activity Score of 1.00 confirms this. As an Intermediate Metabolizer, your body processes certain drugs at a moderate rate, falling between fast and slow metabolizers. This means you may break down some medications slightly faster than slow metabolizers but slower than fast metabolizers. This genetic profile can help guide medication choices and dosing to ensure you receive the right amount of medication for your body.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs4166320",
+          "gene": "SLC01B1",
+          "genotype": "*2/*2",
+          "phenotype": "Unknown"
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "DPYD",
+          "genotype": "*1/*2",
+          "phenotype": "Normal Metabolizer",
+          "llm_explanation": "The 'DPYD' gene diplotype *1/*2 indicates you have one normal copy and one slightly different copy of the gene. However, this combination still allows for normal function. Your phenotype, Normal Metabolizer, means your body processes certain medications, like some cancer drugs, as expected. The Activity Score of 1.00 confirms this, indicating normal enzyme activity. As a Normal Metabolizer, your body breaks down these medications at a standard rate, neither too fast nor too slow. This means you're likely to respond to these medications as predicted, without increased risk of side effects or reduced efficacy due to unusually fast or slow processing.",
+          "llm_cached": true
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Consider higher than normal dose or shorter dosing intervals; monitor pain response",
+      "dosing": "For a patient with an Intermediate Metabolizer phenotype for the CYP2D6 gene taking codeine, the metabolism of codeine to its active form, morphine, is reduced. This can lead to decreased pain relief and increased risk of side effects from codeine itself.\n\nTo adjust, consider reducing the dose by 25-50% to minimize side effects. Monitor the patient closely for efficacy and toxicity.\n\nKey monitoring parameters include pain relief, respiratory rate, and signs of sedation. Watch for warning signs such as excessive drowsiness, confusion, or slowed breathing rate, which can indicate codeine toxicity.\n\nPrioritizing safety, it's crucial to start with a lower dose and titrate up as needed and tolerated, rather than starting with a standard dose that may be too high for an Intermediate Metabolizer. This approach helps minimize the risk of adverse effects while maximizing the potential for effective pain management.",
+      "monitoring": "The CYP2D6 Intermediate Metabolizer phenotype means that an individual's body metabolizes certain drugs at a rate between normal and slow. The Activity Score of 1.00 indicates reduced enzyme activity. \n\nThis affects drugs like codeine, tramadol, and tamoxifen. \nThe metabolism pattern is slower than normal, but not as slow as poor metabolizers. \nClinically, this means that standard drug doses may lead to higher-than-expected drug levels, potentially increasing side effects. Dose adjustments may be necessary to achieve optimal therapy while minimizing adverse effects."
+    },
+    "llm_generated_explanation": {
+      "variant_interpretation": "The 'CYP2D6' gene helps your body process certain medications. Your genetic profile shows a diplotype of *1/*2, meaning you have one normal and one slightly less active copy of the gene. This results in an Intermediate Metabolizer phenotype and an Activity Score of 1.00. The activity score indicates your body's ability to process drugs is moderately reduced. As an Intermediate Metabolizer, your body processes certain medications at a slower rate than normal, but faster than those with poor metabolism. This may affect how you respond to certain medications, and your doctor may need to adjust doses to ensure safe and effective treatment.",
+      "risk_explanation": "**Codeine and CYP2D6 Interaction:**\n\nThe CYP2D6 gene affects how the body processes codeine, converting it to morphine, its active form. As an Intermediate Metabolizer, the body's ability to convert codeine to morphine is reduced (10-20% decrease). This means less morphine is produced, potentially leading to reduced pain relief.\n\nThe Intermediate Metabolizer phenotype results in slower codeine metabolism, which is classified as an 'Adjust Dosage' risk. This is because the reduced conversion may lead to inadequate pain management, requiring dosage adjustments to achieve optimal pain relief.\n\n**Key Patient Safety Points:**\n\n* Monitor pain relief effectiveness\n* Adjust codeine dosage as needed\n* Consider alternative pain medications if necessary\n* Inform healthcare provider about reduced pain relief to ensure proper management.",
+      "clinical_impact": "CYP2D6 (IM): Adjust Dosage",
+      "dosing_recommendation": "For a patient with an Intermediate Metabolizer phenotype for the CYP2D6 gene taking codeine, the metabolism of codeine to its active form, morphine, is reduced. This can lead to decreased pain relief and increased risk of side effects from codeine itself.\n\nTo adjust, consider reducing the dose by 25-50% to minimize side effects. Monitor the patient closely for efficacy and toxicity.\n\nKey monitoring parameters include pain relief, respiratory rate, and signs of sedation. Watch for warning signs such as excessive drowsiness, confusion, or slowed breathing rate, which can indicate codeine toxicity.\n\nPrioritizing safety, it's crucial to start with a lower dose and titrate up as needed and tolerated, rather than starting with a standard dose that may be too high for an Intermediate Metabolizer. This approach helps minimize the risk of adverse effects while maximizing the potential for effective pain management.",
+      "monitoring_guidance": "The CYP2D6 Intermediate Metabolizer phenotype means that an individual's body metabolizes certain drugs at a rate between normal and slow. The Activity Score of 1.00 indicates reduced enzyme activity. \n\nThis affects drugs like codeine, tramadol, and tamoxifen. \nThe metabolism pattern is slower than normal, but not as slow as poor metabolizers. \nClinically, this means that standard drug doses may lead to higher-than-expected drug levels, potentially increasing side effects. Dose adjustments may be necessary to achieve optimal therapy while minimizing adverse effects.",
+      "source": "GROQ LLM (llama-3.3-70b-versatile)"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": [
+        "CYP2D6",
+        "CYP2C19",
+        "CYP2C9",
+        "TPMT",
+        "SLC01B1",
+        "DPYD"
+      ],
+      "variant_count": 6,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2",
+      "llm_used": true,
+      "llm_provider": "GROQ",
+      "llm_model": "llama-3.3-70b-versatile",
+      "llm_cached": true,
+      "explanation_quality": "comprehensive"
+    }
+  },
+  {
+    "patient_id": "PATIENT_1BE04F09",
+    "drug": "Warfarin",
+    "timestamp": "2026-02-19T21:17:33.234650",
+    "risk_assessment": {
+      "risk_label": "Safe",
+      "confidence_score": 0.95,
+      "severity": "none"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "1A",
+      "strength_of_recommendation": "Strong",
+      "clinical_guidance": "Normal metabolizers: Use standard dosing protocol with frequent INR monitoring.",
+      "cpic_evidence": "1A - Strong",
+      "reference": "CPIC Warfarin/CYP2C9/VKORC1 Guidelines"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2D6",
+      "diplotype": "*1/*2",
+      "phenotype": "IM",
+      "detected_variants": [
+        {
+          "rsid": "rs3962172",
+          "gene": "CYP2D6",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer",
+          "llm_explanation": "The 'CYP2D6' gene helps your body process certain medications. Your genetic profile shows a diplotype of *1/*2, meaning you have one normal and one slightly less active copy of the gene. This results in an Intermediate Metabolizer phenotype and an Activity Score of 1.00. The activity score indicates your body's ability to process drugs is moderately reduced. As an Intermediate Metabolizer, your body processes certain medications at a slower rate than normal, but faster than those with poor metabolism. This may affect how you respond to certain medications, and your doctor may need to adjust doses to ensure safe and effective treatment.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "CYP2C19",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer",
+          "llm_explanation": "The 'CYP2C19' gene diplotype *1/*2 indicates you have one normal gene and one variant gene. This combination results in an Intermediate Metabolizer phenotype. The Activity Score of 1.00 confirms this. As an Intermediate Metabolizer, you break down certain medications at a rate between normal and slow. This means you may process some drugs slightly faster than slow metabolizers, but slower than normal metabolizers. In general, this can lead to variable responses to certain medications, and your doctor may need to adjust dosages to achieve the best results. It's essential to discuss your genetic profile with your healthcare provider to ensure safe and effective treatment.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "CYP2C9",
+          "genotype": "*1/*2",
+          "phenotype": "Normal Metabolizer",
+          "llm_explanation": "The 'CYP2C9' gene diplotype *1/*2 indicates you have one normal copy and one slightly less active copy of the gene. Your phenotype is a Normal Metabolizer, meaning your body processes certain medications at a typical rate. The Activity Score of 1.00 confirms this, indicating your enzyme activity is average. As a Normal Metabolizer, you're likely to process medications faster than someone with a slower metabolism, but not as fast as someone with a faster metabolism. This means you may respond to medications as expected, without increased risk of side effects or reduced effectiveness. Your doctor can use this information to choose the right medications and doses for you.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "TPMT",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer",
+          "llm_explanation": "The 'TPMT' gene diplotype *1/*2 indicates you have one normal and one slightly altered copy of the gene. This combination results in an Intermediate Metabolizer phenotype. The Activity Score of 1.00 confirms this. As an Intermediate Metabolizer, your body processes certain drugs at a moderate rate, falling between fast and slow metabolizers. This means you may break down some medications slightly faster than slow metabolizers but slower than fast metabolizers. This genetic profile can help guide medication choices and dosing to ensure you receive the right amount of medication for your body.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs4166320",
+          "gene": "SLC01B1",
+          "genotype": "*2/*2",
+          "phenotype": "Unknown"
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "DPYD",
+          "genotype": "*1/*2",
+          "phenotype": "Normal Metabolizer",
+          "llm_explanation": "The 'DPYD' gene diplotype *1/*2 indicates you have one normal copy and one slightly different copy of the gene. However, this combination still allows for normal function. Your phenotype, Normal Metabolizer, means your body processes certain medications, like some cancer drugs, as expected. The Activity Score of 1.00 confirms this, indicating normal enzyme activity. As a Normal Metabolizer, your body breaks down these medications at a standard rate, neither too fast nor too slow. This means you're likely to respond to these medications as predicted, without increased risk of side effects or reduced efficacy due to unusually fast or slow processing.",
+          "llm_cached": true
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Use standard initiation: 5-10 mg daily; adjust based on INR response",
+      "dosing": "For a patient with an intermediate metabolizer phenotype for the CYP2D6 gene taking Warfarin, the dose metabolism is affected as follows: \n\n1. The intermediate metabolizer phenotype leads to reduced warfarin metabolism, resulting in higher drug concentrations.\n2. A dose adjustment may be necessary; consider starting with a lower dose (e.g., 20-30% reduction) and titrating to effect.\n3. Monitor international normalized ratio (INR) levels closely, at least weekly, to ensure therapeutic anticoagulation and minimize bleeding risk.\n4. Key warning signs to watch for include unusual bruising, bleeding, or INR levels outside the target range (typically 2.0-3.0). If these occur, reassess the dose and adjust as needed to prioritize patient safety.",
+      "monitoring": "The CYP2D6 Intermediate Metabolizer phenotype indicates that an individual has reduced enzyme activity, but not as low as a Poor Metabolizer. \n\n1. This phenotype means they metabolize certain drugs at a slower rate than normal.\n2. Commonly affected drugs include antidepressants (e.g., fluoxetine), anti-psychotics, and beta-blockers.\n3. Metabolism pattern: Slower than normal.\n4. Clinical significance: Intermediate Metabolizers may experience higher drug concentrations, increasing the risk of side effects. Dose adjustments may be necessary to avoid toxicity. Close monitoring is recommended when prescribing affected medications."
+    },
+    "llm_generated_explanation": {
+      "variant_interpretation": "The 'CYP2D6' gene helps your body process certain medications. Your genetic profile shows a diplotype of *1/*2, meaning you have one normal and one slightly less active copy of the gene. This results in an Intermediate Metabolizer phenotype and an Activity Score of 1.00. The activity score indicates your body's ability to process drugs is moderately reduced. As an Intermediate Metabolizer, your body processes certain medications at a slower rate than normal, but faster than those with poor metabolism. This may affect how you respond to certain medications, and your doctor may need to adjust doses to ensure safe and effective treatment.",
+      "risk_explanation": "Warfarin is a blood thinner that interacts with the CYP2D6 gene. However, Warfarin is primarily metabolized by CYP2C9, not CYP2D6. As an Intermediate Metabolizer of CYP2D6, this has minimal impact on Warfarin metabolism. The standard dosing protocol with frequent INR monitoring is still applicable. This interaction is classified as 'Safe' because the CYP2D6 genotype has a negligible effect on Warfarin's efficacy and safety. Key patient safety points include: monitoring INR levels regularly to adjust dosing, being aware of other medications that may interact with Warfarin, and reporting any changes in bleeding or bruising to healthcare providers. Overall, the CYP2D6 Intermediate Metabolizer phenotype does not significantly alter the management of Warfarin therapy.",
+      "clinical_impact": "CYP2D6 (IM): Safe",
+      "dosing_recommendation": "For a patient with an intermediate metabolizer phenotype for the CYP2D6 gene taking Warfarin, the dose metabolism is affected as follows: \n\n1. The intermediate metabolizer phenotype leads to reduced warfarin metabolism, resulting in higher drug concentrations.\n2. A dose adjustment may be necessary; consider starting with a lower dose (e.g., 20-30% reduction) and titrating to effect.\n3. Monitor international normalized ratio (INR) levels closely, at least weekly, to ensure therapeutic anticoagulation and minimize bleeding risk.\n4. Key warning signs to watch for include unusual bruising, bleeding, or INR levels outside the target range (typically 2.0-3.0). If these occur, reassess the dose and adjust as needed to prioritize patient safety.",
+      "monitoring_guidance": "The CYP2D6 Intermediate Metabolizer phenotype indicates that an individual has reduced enzyme activity, but not as low as a Poor Metabolizer. \n\n1. This phenotype means they metabolize certain drugs at a slower rate than normal.\n2. Commonly affected drugs include antidepressants (e.g., fluoxetine), anti-psychotics, and beta-blockers.\n3. Metabolism pattern: Slower than normal.\n4. Clinical significance: Intermediate Metabolizers may experience higher drug concentrations, increasing the risk of side effects. Dose adjustments may be necessary to avoid toxicity. Close monitoring is recommended when prescribing affected medications.",
+      "source": "GROQ LLM (llama-3.3-70b-versatile)"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": [
+        "CYP2D6",
+        "CYP2C19",
+        "CYP2C9",
+        "TPMT",
+        "SLC01B1",
+        "DPYD"
+      ],
+      "variant_count": 6,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2",
+      "llm_used": true,
+      "llm_provider": "GROQ",
+      "llm_model": "llama-3.3-70b-versatile",
+      "llm_cached": true,
+      "explanation_quality": "comprehensive"
+    }
+  },
+  {
+    "patient_id": "PATIENT_1BE04F09",
+    "drug": "Clopidogrel",
+    "timestamp": "2026-02-19T21:17:33.234650",
+    "risk_assessment": {
+      "risk_label": "Adjust Dosage",
+      "confidence_score": 0.95,
+      "severity": "moderate"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "2B",
+      "strength_of_recommendation": "Moderate",
+      "clinical_guidance": "Intermediate metabolizers have reduced antiplatelet effect; may not achieve therapeutic levels.",
+      "cpic_evidence": "2B - Moderate",
+      "reference": "CPIC Clopidogrel/CYP2C19 Guidelines"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2D6",
+      "diplotype": "*1/*2",
+      "phenotype": "IM",
+      "detected_variants": [
+        {
+          "rsid": "rs3962172",
+          "gene": "CYP2D6",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer",
+          "llm_explanation": "The 'CYP2D6' gene helps your body process certain medications. Your genetic profile shows a diplotype of *1/*2, meaning you have one normal and one slightly less active copy of the gene. This results in an Intermediate Metabolizer phenotype and an Activity Score of 1.00. The activity score indicates your body's ability to process drugs is moderately reduced. As an Intermediate Metabolizer, your body processes certain medications at a slower rate than normal, but faster than those with poor metabolism. This may affect how you respond to certain medications, and your doctor may need to adjust doses to ensure safe and effective treatment.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "CYP2C19",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer",
+          "llm_explanation": "The 'CYP2C19' gene diplotype *1/*2 indicates you have one normal gene and one variant gene. This combination results in an Intermediate Metabolizer phenotype. The Activity Score of 1.00 confirms this. As an Intermediate Metabolizer, you break down certain medications at a rate between normal and slow. This means you may process some drugs slightly faster than slow metabolizers, but slower than normal metabolizers. In general, this can lead to variable responses to certain medications, and your doctor may need to adjust dosages to achieve the best results. It's essential to discuss your genetic profile with your healthcare provider to ensure safe and effective treatment.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "CYP2C9",
+          "genotype": "*1/*2",
+          "phenotype": "Normal Metabolizer",
+          "llm_explanation": "The 'CYP2C9' gene diplotype *1/*2 indicates you have one normal copy and one slightly less active copy of the gene. Your phenotype is a Normal Metabolizer, meaning your body processes certain medications at a typical rate. The Activity Score of 1.00 confirms this, indicating your enzyme activity is average. As a Normal Metabolizer, you're likely to process medications faster than someone with a slower metabolism, but not as fast as someone with a faster metabolism. This means you may respond to medications as expected, without increased risk of side effects or reduced effectiveness. Your doctor can use this information to choose the right medications and doses for you.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "TPMT",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer",
+          "llm_explanation": "The 'TPMT' gene diplotype *1/*2 indicates you have one normal and one slightly altered copy of the gene. This combination results in an Intermediate Metabolizer phenotype. The Activity Score of 1.00 confirms this. As an Intermediate Metabolizer, your body processes certain drugs at a moderate rate, falling between fast and slow metabolizers. This means you may break down some medications slightly faster than slow metabolizers but slower than fast metabolizers. This genetic profile can help guide medication choices and dosing to ensure you receive the right amount of medication for your body.",
+          "llm_cached": true
+        },
+        {
+          "rsid": "rs4166320",
+          "gene": "SLC01B1",
+          "genotype": "*2/*2",
+          "phenotype": "Unknown"
+        },
+        {
+          "rsid": "rs3962172",
+          "gene": "DPYD",
+          "genotype": "*1/*2",
+          "phenotype": "Normal Metabolizer",
+          "llm_explanation": "The 'DPYD' gene diplotype *1/*2 indicates you have one normal copy and one slightly different copy of the gene. However, this combination still allows for normal function. Your phenotype, Normal Metabolizer, means your body processes certain medications, like some cancer drugs, as expected. The Activity Score of 1.00 confirms this, indicating normal enzyme activity. As a Normal Metabolizer, your body breaks down these medications at a standard rate, neither too fast nor too slow. This means you're likely to respond to these medications as predicted, without increased risk of side effects or reduced efficacy due to unusually fast or slow processing.",
+          "llm_cached": true
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Consider alternative P2Y12 inhibitor (prasugrel 5-10 mg daily or ticagrelor 60-90 mg daily) OR increase clopidogrel to 150 mg daily",
+      "dosing": "As an intermediate metabolizer of CYP2D6, the patient's body may not effectively activate clopidogrel, a prodrug. This affects dose metabolism, potentially leading to reduced antiplatelet activity and increased risk of thrombotic events.\n\nA dose adjustment may be necessary to ensure efficacy. Consider increasing the dose to 225-300 mg loading dose, followed by 75-150 mg daily.\n\nMonitor the patient's platelet function and adjust the dose accordingly. Also, watch for signs of bleeding, such as bruising, petechiae, or gastrointestinal bleeding.\n\nKey warning signs to watch for include:\n- Unusual bleeding or bruising\n- Chest pain or shortness of breath\n- Headache or dizziness\n- Abdominal pain or vomiting\n\nPrioritize patient safety by closely monitoring their response to clopidogrel and adjusting the dose as needed to minimize the risk of adverse events. Consult with a healthcare provider or pharmacist for personalized guidance.",
+      "monitoring": "The CYP2D6 Intermediate Metabolizer phenotype indicates that an individual has reduced enzyme activity, but not as low as a Poor Metabolizer. \n\n1. This phenotype means they metabolize certain drugs at a slower rate than normal.\n2. Commonly affected drugs include antidepressants (e.g., fluoxetine), antipsychotics (e.g., risperidone), and pain medications (e.g., codeine).\n3. Metabolism pattern: slower than normal.\n4. Clinical significance: Intermediate Metabolizers may experience higher drug concentrations, increasing the risk of side effects. Dose adjustments may be necessary to avoid toxicity and ensure efficacy. Close monitoring is recommended when prescribing affected medications."
+    },
+    "llm_generated_explanation": {
+      "variant_interpretation": "The 'CYP2D6' gene helps your body process certain medications. Your genetic profile shows a diplotype of *1/*2, meaning you have one normal and one slightly less active copy of the gene. This results in an Intermediate Metabolizer phenotype and an Activity Score of 1.00. The activity score indicates your body's ability to process drugs is moderately reduced. As an Intermediate Metabolizer, your body processes certain medications at a slower rate than normal, but faster than those with poor metabolism. This may affect how you respond to certain medications, and your doctor may need to adjust doses to ensure safe and effective treatment.",
+      "risk_explanation": "The interaction between Clopidogrel and the CYP2D6 gene affects how the body processes the drug. As an Intermediate Metabolizer, the body breaks down Clopidogrel less efficiently, leading to reduced antiplatelet effect. This means the drug may not work as well to prevent blood clots.\n\nThe Intermediate Metabolizer phenotype slows down Clopidogrel metabolism, resulting in lower levels of the active form of the drug. This increases the risk of inadequate treatment.\n\nThis interaction is classified as 'Adjust Dosage' because the reduced metabolism may require a higher dose of Clopidogrel to achieve therapeutic levels. Key patient safety points include monitoring for signs of inadequate antiplatelet effect and considering alternative treatments or dose adjustments to ensure effective treatment and minimize the risk of blood clots. Close medical supervision is necessary to optimize therapy.",
+      "clinical_impact": "CYP2D6 (IM): Adjust Dosage",
+      "dosing_recommendation": "As an intermediate metabolizer of CYP2D6, the patient's body may not effectively activate clopidogrel, a prodrug. This affects dose metabolism, potentially leading to reduced antiplatelet activity and increased risk of thrombotic events.\n\nA dose adjustment may be necessary to ensure efficacy. Consider increasing the dose to 225-300 mg loading dose, followed by 75-150 mg daily.\n\nMonitor the patient's platelet function and adjust the dose accordingly. Also, watch for signs of bleeding, such as bruising, petechiae, or gastrointestinal bleeding.\n\nKey warning signs to watch for include:\n- Unusual bleeding or bruising\n- Chest pain or shortness of breath\n- Headache or dizziness\n- Abdominal pain or vomiting\n\nPrioritize patient safety by closely monitoring their response to clopidogrel and adjusting the dose as needed to minimize the risk of adverse events. Consult with a healthcare provider or pharmacist for personalized guidance.",
+      "monitoring_guidance": "The CYP2D6 Intermediate Metabolizer phenotype indicates that an individual has reduced enzyme activity, but not as low as a Poor Metabolizer. \n\n1. This phenotype means they metabolize certain drugs at a slower rate than normal.\n2. Commonly affected drugs include antidepressants (e.g., fluoxetine), antipsychotics (e.g., risperidone), and pain medications (e.g., codeine).\n3. Metabolism pattern: slower than normal.\n4. Clinical significance: Intermediate Metabolizers may experience higher drug concentrations, increasing the risk of side effects. Dose adjustments may be necessary to avoid toxicity and ensure efficacy. Close monitoring is recommended when prescribing affected medications.",
+      "source": "GROQ LLM (llama-3.3-70b-versatile)"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": [
+        "CYP2D6",
+        "CYP2C19",
+        "CYP2C9",
+        "TPMT",
+        "SLC01B1",
+        "DPYD"
+      ],
+      "variant_count": 6,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2",
+      "llm_used": true,
+      "llm_provider": "GROQ",
+      "llm_model": "llama-3.3-70b-versatile",
+      "llm_cached": true,
+      "explanation_quality": "comprehensive"
+    }
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "patient_id": "PATIENT_5B8128A6",
+    "drug": "Codeine",
+    "timestamp": "2026-02-19T16:51:46.705186",
+    "risk_assessment": {
+      "risk_label": "Ineffective",
+      "confidence_score": 0.95,
+      "severity": "high"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "1A",
+      "strength_of_recommendation": "Strong",
+      "clinical_guidance": "Poor metabolizers have little-to-no morphine formation, making codeine ineffective for pain relief.",
+      "cpic_evidence": "1A - Strong",
+      "reference": "PharmGKB CPIC Codeine/CYP2D6"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2D6",
+      "diplotype": "*2/*2",
+      "phenotype": "PM",
+      "detected_variants": [
+        {
+          "rsid": "rs7364978",
+          "gene": "CYP2D6",
+          "genotype": "*2/*2",
+          "phenotype": "Poor Metabolizer"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "NOT RECOMMENDED for pain control - Use alternative analgesic (morphine, oxycodone, hydromorphone, tramadol, or non-opioid options)",
+      "dosing": "0% - Do not use% adjustment",
+      "monitoring": "If used despite recommendation: Monitor for complete lack of pain relief"
+    },
+    "llm_generated_explanation": {
+      "summary": "Based on genetic profile, Codeine shows ineffective risk.",
+      "clinical_impact": "CYP2D6 (Poor Metabolizer): Ineffective"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": [
+        "CYP2D6"
+      ],
+      "variant_count": 1,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2"
+    }
+  },
+  {
+    "patient_id": "PATIENT_5B8128A6",
+    "drug": "Tramadol",
+    "timestamp": "2026-02-19T16:51:46.705186",
+    "risk_assessment": {
+      "risk_label": "Unknown",
+      "confidence_score": 0.5,
+      "severity": "none"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "No data",
+      "strength_of_recommendation": "Moderate",
+      "clinical_guidance": "",
+      "cpic_evidence": "No data",
+      "reference": "Manual review required"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2D6",
+      "diplotype": "*2/*2",
+      "phenotype": "PM",
+      "detected_variants": [
+        {
+          "rsid": "rs7364978",
+          "gene": "CYP2D6",
+          "genotype": "*2/*2",
+          "phenotype": "Poor Metabolizer"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Consult with clinical pharmacist or pharmacogenomic specialist",
+      "dosing": "Unknown% adjustment",
+      "monitoring": "Standard monitoring"
+    },
+    "llm_generated_explanation": {
+      "summary": "Based on genetic profile, Tramadol shows unknown risk.",
+      "clinical_impact": "No pharmacogenomic data available for 'Tramadol'. Consult clinical pharmacist or CPIC guidelines."
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": [
+        "CYP2D6"
+      ],
+      "variant_count": 1,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2"
+    }
+  },
+  {
+    "patient_id": "PATIENT_5B8128A6",
+    "drug": "Metoprolol",
+    "timestamp": "2026-02-19T16:51:46.705186",
+    "risk_assessment": {
+      "risk_label": "Unknown",
+      "confidence_score": 0.5,
+      "severity": "none"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "2B",
+      "strength_of_recommendation": "Moderate",
+      "clinical_guidance": "Poor metabolizers may accumulate metoprolol; increased side effects.",
+      "cpic_evidence": "2B - Moderate",
+      "reference": "PharmGKB CYP2D6 Metabolizers"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2D6",
+      "diplotype": "*2/*2",
+      "phenotype": "PM",
+      "detected_variants": [
+        {
+          "rsid": "rs7364978",
+          "gene": "CYP2D6",
+          "genotype": "*2/*2",
+          "phenotype": "Poor Metabolizer"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Reduce dose 25-50%; consider alternative beta-blocker not metabolized by CYP2D6 (atenolol, bisoprolol, carvedilol)",
+      "dosing": "50-75% reduction% adjustment",
+      "monitoring": "Monitor for bradycardia (< 50 bpm), hypotension, fatigue, dizziness"
+    },
+    "llm_generated_explanation": {
+      "summary": "Based on genetic profile, Metoprolol shows unknown risk.",
+      "clinical_impact": "CYP2D6: No CPIC mapping for Metoprolol - manual review recommended"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": [
+        "CYP2D6"
+      ],
+      "variant_count": 1,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2"
+    }
+  }
+]
