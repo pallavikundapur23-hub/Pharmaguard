@@ -1,0 +1,278 @@
+[
+  {
+    "patient_id": "PATIENT_CPIC_6GENE",
+    "drug": "Codeine",
+    "timestamp": "2026-02-20T10:00:00.000000",
+    "risk_assessment": {
+      "risk_label": "Adjust Dosage",
+      "confidence_score": 0.95,
+      "severity": "moderate"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "2A",
+      "strength_of_recommendation": "Strong",
+      "clinical_guidance": "Intermediate metabolizers have reduced morphine formation (10-20% reduction). Consider higher doses or shorter intervals.",
+      "cpic_evidence": "2A - Moderate",
+      "reference": "CPIC Codeine/CYP2D6 Guideline v2.1"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2D6",
+      "diplotype": "*1/*2",
+      "phenotype": "Intermediate Metabolizer",
+      "detected_variants": [
+        {
+          "rsid": "rs3892097",
+          "gene": "CYP2D6",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer (IM)"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Consider higher than normal dose or shorter dosing intervals; pain response-driven titration",
+      "dosing": "120-150% of standard dose may be needed",
+      "monitoring": "Assess pain control; titrate dose based on response (may need 30-60 mg per dose)"
+    },
+    "llm_generated_explanation": {
+      "summary": "CYP2D6 IM phenotype suggests reduced codeine-to-morphine conversion",
+      "clinical_impact": "CYP2D6 (IM): Adjust dosage - 20% increased analgesic requirements"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": ["CYP2D6", "CYP2C9", "CYP2C19", "TPMT", "SLCO1B1", "DPYD"],
+      "variant_count": 6,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2.1"
+    }
+  },
+  {
+    "patient_id": "PATIENT_CPIC_6GENE",
+    "drug": "Warfarin",
+    "timestamp": "2026-02-20T10:00:00.000000",
+    "risk_assessment": {
+      "risk_label": "Adjust Dosage",
+      "confidence_score": 0.95,
+      "severity": "moderate"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "1A",
+      "strength_of_recommendation": "Strong",
+      "clinical_guidance": "CYP2C9 *1/*2 (Intermediate metabolizer): 5-7 mg/day initial dose. VKORC1 not available in this test profile.",
+      "cpic_evidence": "1A - Strong",
+      "reference": "CPIC Warfarin/CYP2C9/VKORC1 Guideline v2.0"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2C9",
+      "diplotype": "*1/*2",
+      "phenotype": "Intermediate Metabolizer",
+      "detected_variants": [
+        {
+          "rsid": "rs1057910",
+          "gene": "CYP2C9",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer (IM)"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Reduce initial dose to 5-7 mg daily; adjust based on INR response. More frequent INR monitoring required.",
+      "dosing": "50-70% of standard dose (5-7 mg initial)",
+      "monitoring": "INR at baseline, 2-7 days, weekly x 1-2 weeks, then every 1-4 weeks. Target INR 2.0-3.0"
+    },
+    "llm_generated_explanation": {
+      "summary": "CYP2C9 IM phenotype strongly predicts reduced warfarin metabolism",
+      "clinical_impact": "CYP2C9 (IM): Reduce dose 30-40% | Higher sensitivity to warfarin"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": ["CYP2D6", "CYP2C9", "CYP2C19", "TPMT", "SLCO1B1", "DPYD"],
+      "variant_count": 6,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2.0"
+    }
+  },
+  {
+    "patient_id": "PATIENT_CPIC_6GENE",
+    "drug": "Clopidogrel",
+    "timestamp": "2026-02-20T10:00:00.000000",
+    "risk_assessment": {
+      "risk_label": "Adjust Dosage",
+      "confidence_score": 0.95,
+      "severity": "moderate"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "2B",
+      "strength_of_recommendation": "Moderate",
+      "clinical_guidance": "CYP2C19 *1/*2 (Intermediate metabolizer): Reduced antiplatelet effect; may not achieve therapeutic levels.",
+      "cpic_evidence": "2B - Moderate",
+      "reference": "CPIC Clopidogrel/CYP2C19 Guideline v3.0"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "CYP2C19",
+      "diplotype": "*1/*2",
+      "phenotype": "Intermediate Metabolizer",
+      "detected_variants": [
+        {
+          "rsid": "rs4244285",
+          "gene": "CYP2C19",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Metabolizer (IM)"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Consider alternative antiplatelet (prasugrel 5-10 mg or ticagrelor 60-90 mg) OR increase clopidogrel dose",
+      "dosing": "Increase to 600 mg loading dose, 150 mg daily maintenance (vs standard 300/75 mg)",
+      "monitoring": "Heightened risk for stent thrombosis; assess response; consider platelet function testing"
+    },
+    "llm_generated_explanation": {
+      "summary": "CYP2C19 IM phenotype results in suboptimal clopidogrel activation",
+      "clinical_impact": "CYP2C19 (IM): Reduced antiplatelet effect - alternative P2Y12 inhibitor preferred"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": ["CYP2D6", "CYP2C9", "CYP2C19", "TPMT", "SLCO1B1", "DPYD"],
+      "variant_count": 6,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v3.0"
+    }
+  },
+  {
+    "patient_id": "PATIENT_CPIC_6GENE",
+    "drug": "Simvastatin",
+    "timestamp": "2026-02-20T10:00:00.000000",
+    "risk_assessment": {
+      "risk_label": "Increased Risk",
+      "confidence_score": 0.90,
+      "severity": "moderate"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "2B",
+      "strength_of_recommendation": "Moderate",
+      "clinical_guidance": "SLCO1B1 *1/*2 (Decreased function): Increased simvastatin concentrations and myopathy risk. Reduce dose or use alternative.",
+      "cpic_evidence": "2B - Moderate",
+      "reference": "CPIC Simvastatin/SLCO1B1 Guideline v1.0"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "SLCO1B1",
+      "diplotype": "*1/*2",
+      "phenotype": "Decreased Function",
+      "detected_variants": [
+        {
+          "rsid": "rs4149056",
+          "gene": "SLCO1B1",
+          "genotype": "*1/*2",
+          "phenotype": "Decreased Function"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Reduce simvastatin dose to 5 mg daily maximum; consider pravastatin or rosuvastatin (not SLCO1B1 substrates)",
+      "dosing": "5 mg daily (vs standard 10-40 mg range)",
+      "monitoring": "Assess muscle symptoms (pain, weakness, dark urine); measure CK baseline; LFTs at baseline and 12 weeks"
+    },
+    "llm_generated_explanation": {
+      "summary": "SLCO1B1 decreased function impairs simvastatin hepatic uptake",
+      "clinical_impact": "SLCO1B1 (*1/*2): 4-fold increased simvastatin levels - myopathy and rhabdomyolysis risk"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": ["CYP2D6", "CYP2C9", "CYP2C19", "TPMT", "SLCO1B1", "DPYD"],
+      "variant_count": 6,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v1.0"
+    }
+  },
+  {
+    "patient_id": "PATIENT_CPIC_6GENE",
+    "drug": "Azathioprine",
+    "timestamp": "2026-02-20T10:00:00.000000",
+    "risk_assessment": {
+      "risk_label": "Adjust Dosage",
+      "confidence_score": 0.95,
+      "severity": "moderate"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "1A",
+      "strength_of_recommendation": "Strong",
+      "clinical_guidance": "TPMT *1/*2 (Intermediate activity): Increased risk of 6-TGN accumulation and bone marrow toxicity. Reduce dose 25-50%.",
+      "cpic_evidence": "1A - Strong",
+      "reference": "CPIC Azathioprine/TPMT Guideline v2.1"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "TPMT",
+      "diplotype": "*1/*2",
+      "phenotype": "Intermediate Metabolizer",
+      "detected_variants": [
+        {
+          "rsid": "rs1800462",
+          "gene": "TPMT",
+          "genotype": "*1/*2",
+          "phenotype": "Intermediate Activity"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Reduce standard azathioprine dose by 25-50%; start with 0.5-1 mg/kg/day (vs 1-2.5 mg/kg standard)",
+      "dosing": "50% dose reduction (e.g., 25 mg daily instead of 50 mg)",
+      "monitoring": "CBC (white blood cell count, hemoglobin, platelets) weekly x 4-6 weeks, then every 2 weeks. Watch for infections, anemia, bleeding"
+    },
+    "llm_generated_explanation": {
+      "summary": "TPMT intermediate activity leads to increased 6-TGN metabolite accumulation",
+      "clinical_impact": "TPMT (IM): Bone marrow toxicity risk - mandatory dose reduction"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": ["CYP2D6", "CYP2C9", "CYP2C19", "TPMT", "SLCO1B1", "DPYD"],
+      "variant_count": 6,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v2.1"
+    }
+  },
+  {
+    "patient_id": "PATIENT_CPIC_6GENE",
+    "drug": "Fluorouracil",
+    "timestamp": "2026-02-20T10:00:00.000000",
+    "risk_assessment": {
+      "risk_label": "Adjust Dosage",
+      "confidence_score": 0.95,
+      "severity": "moderate"
+    },
+    "cpic_guidelines": {
+      "recommendation_level": "2A",
+      "strength_of_recommendation": "Moderate",
+      "clinical_guidance": "DPYD *1/*2 (Decreased activity): Reduced fluorouracil clearance; significantly increased toxicity risk (neutropenia, mucositis, diarrhea).",
+      "cpic_evidence": "2A - Moderate",
+      "reference": "CPIC Fluorouracil/DPYD Guideline v1.0"
+    },
+    "pharmacogenomic_profile": {
+      "primary_gene": "DPYD",
+      "diplotype": "*1/*2",
+      "phenotype": "Decreased Activity",
+      "detected_variants": [
+        {
+          "rsid": "rs3918290",
+          "gene": "DPYD",
+          "genotype": "*1/*2",
+          "phenotype": "Decreased Activity"
+        }
+      ]
+    },
+    "clinical_recommendation": {
+      "summary": "Reduce fluorouracil dose by 25-50%; start with lower dose and titrate slowly based on tolerance",
+      "dosing": "50% dose reduction (e.g., 500 mg/m² instead of 1000 mg/m² daily)",
+      "monitoring": "Frequent CBC monitoring; watch closely for severe neutropenia, mucositis grade 3+, diarrhea. Consider alternative chemotherapy if severe toxicity"
+    },
+    "llm_generated_explanation": {
+      "summary": "DPYD decreased activity impairs fluorouracil metabolism and clearance",
+      "clinical_impact": "DPYD (*1/*2): Severe toxicity risk - mandatory dose reduction and intensive monitoring"
+    },
+    "quality_metrics": {
+      "vcf_parsing_success": true,
+      "genes_analyzed": ["CYP2D6", "CYP2C9", "CYP2C19", "TPMT", "SLCO1B1", "DPYD"],
+      "variant_count": 6,
+      "data_completeness": "standard",
+      "algorithm_version": "CPIC-aligned-v1.0"
+    }
+  }
+]

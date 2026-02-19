@@ -16,7 +16,7 @@ from src.utils import (
     validate_drug_input,
 )
 from src.gene_models import Phenotype
-from src.drug_mapping import get_drug_recommendations
+
 
 
 # Page configuration
@@ -56,23 +56,22 @@ def main():
         - CYP2D6, CYP2C19, CYP2C9
         - SLC01B1, TPMT, DPYD
         
-        **Supports 7+ Drugs**
+        **Supports 6 Drugs**
         """)
         
         st.markdown("---")
         st.markdown("### 🔗 Resources")
         st.markdown("[CPIC Guidelines](https://cpicpgx.org)")
-        st.markdown("[GitHub Repo](https://github.com)")
     
     # Main content tabs
-    tab1, tab2, tab3, tab4 = st.tabs(["📤 Upload & Analyze", "🚀 Quick Drug Check", "📚 About", "🧪 Test"])
+    tab1, tab3, tab4 = st.tabs(["📤 Upload & Analyze",  "📚 About", "🧪 Test"])
     
     # Tab 1: Upload & Analyze
     with tab1:
         st.markdown("### Step 1: Upload VCF File")
         uploaded_file = st.file_uploader(
             "Select VCF file (max 5MB)",
-            type=["vcf", "gz"],
+            type=["vcf"],
             help="Variant Call Format file with genomic data"
         )
         
@@ -130,139 +129,7 @@ def main():
             else:
                 analyze_vcf(uploaded_file, selected_drugs)
     
-    # Tab 2: Quick Drug Check
-    with tab2:
-        st.markdown("### 💊 Quick Drug Safety Check")
-        st.markdown("Check pharmacogenomic risk for any drug without uploading a VCF file")
-        
-        st.markdown("---")
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.markdown("**Step 1: Select a drug**")
-            drug_choice = st.selectbox(
-                "Choose a drug:",
-                SUPPORTED_DRUGS,
-                key="quick_drug_select"
-            )
-        
-        with col2:
-            st.markdown("**Step 2: Or enter any drug name**")
-            custom_drug = st.text_input(
-                "Enter custom drug name:",
-                placeholder="e.g., Aspirin, Metformin, etc.",
-                key="quick_custom_drug"
-            )
-        
-        # Use custom drug if provided, otherwise use selected
-        drug_to_check = custom_drug.strip() if custom_drug else drug_choice
-        
-        st.markdown("---")
-        
-        st.markdown("**Step 3: Select patient phenotype profile**")
-        st.info("💡 Tip: This shows risk based on common genetic profiles. For detailed analysis, upload your VCF file.")
-        
-        # Phenotype profile selector
-        profile_col1, profile_col2, profile_col3 = st.columns(3)
-        
-        with profile_col1:
-            cyp2d6_pheno = st.selectbox("CYP2D6:", [
-                Phenotype.NORMAL.value,
-                Phenotype.ULTRA_RAPID.value,
-                Phenotype.RAPID.value,
-                Phenotype.INTERMEDIATE.value,
-                Phenotype.POOR.value,
-                Phenotype.NO_FUNCTION.value,
-            ], key="quick_cyp2d6")
-        
-        with profile_col2:
-            cyp2c19_pheno = st.selectbox("CYP2C19:", [
-                Phenotype.NORMAL.value,
-                Phenotype.ULTRA_RAPID.value,
-                Phenotype.RAPID.value,
-                Phenotype.INTERMEDIATE.value,
-                Phenotype.POOR.value,
-            ], key="quick_cyp2c19")
-        
-        with profile_col3:
-            cyp2c9_pheno = st.selectbox("CYP2C9:", [
-                Phenotype.NORMAL.value,
-                Phenotype.INTERMEDIATE.value,
-                Phenotype.POOR.value,
-            ], key="quick_cyp2c9")
-        
-        profile_col4, profile_col5, profile_col6 = st.columns(3)
-        
-        with profile_col4:
-            tpmt_pheno = st.selectbox("TPMT:", [
-                Phenotype.NORMAL.value,
-                Phenotype.INTERMEDIATE.value,
-                Phenotype.POOR.value,
-            ], key="quick_tpmt")
-        
-        with profile_col5:
-            slco1b1_pheno = st.selectbox("SLC01B1:", [
-                Phenotype.NORMAL.value,
-                Phenotype.INTERMEDIATE.value,
-                Phenotype.POOR.value,
-            ], key="quick_slco1b1")
-        
-        with profile_col6:
-            dpyd_pheno = st.selectbox("DPYD:", [
-                Phenotype.NORMAL.value,
-                Phenotype.INTERMEDIATE.value,
-                Phenotype.POOR.value,
-            ], key="quick_dpyd")
-        
-        st.markdown("---")
-        
-        # Pre-built profiles
-        with st.expander("📋 Use Pre-built Profiles"):
-            profile_type = st.radio(
-                "Select a profile:",
-                ["Custom", "Normal Metabolizer (All)", "Poor Metabolizer (All)", "Mixed Profile"],
-                key="quick_profile_type"
-            )
-            
-            if profile_type == "Normal Metabolizer (All)":
-                cyp2d6_pheno = cyp2c19_pheno = cyp2c9_pheno = tpmt_pheno = slco1b1_pheno = dpyd_pheno = Phenotype.NORMAL.value
-            elif profile_type == "Poor Metabolizer (All)":
-                cyp2d6_pheno = cyp2c19_pheno = cyp2c9_pheno = tpmt_pheno = slco1b1_pheno = dpyd_pheno = Phenotype.POOR.value
-            elif profile_type == "Mixed Profile":
-                cyp2d6_pheno = Phenotype.INTERMEDIATE.value
-                cyp2c19_pheno = Phenotype.POOR.value
-                cyp2c9_pheno = Phenotype.NORMAL.value
-                tpmt_pheno = Phenotype.INTERMEDIATE.value
-                slco1b1_pheno = Phenotype.NORMAL.value
-                dpyd_pheno = Phenotype.POOR.value
-        
-        st.markdown("---")
-        
-        # Convert phenotype strings to Phenotype enums
-        phenotype_map = {
-            "Ultra-Rapid Metabolizer": Phenotype.ULTRA_RAPID,
-            "Rapid Metabolizer": Phenotype.RAPID,
-            "Normal Metabolizer": Phenotype.NORMAL,
-            "Intermediate Metabolizer": Phenotype.INTERMEDIATE,
-            "Poor Metabolizer": Phenotype.POOR,
-            "No Function": Phenotype.NO_FUNCTION,
-        }
-        
-        phenotypes = {
-            "CYP2D6": phenotype_map.get(cyp2d6_pheno, Phenotype.NORMAL),
-            "CYP2C19": phenotype_map.get(cyp2c19_pheno, Phenotype.NORMAL),
-            "CYP2C9": phenotype_map.get(cyp2c9_pheno, Phenotype.NORMAL),
-            "TPMT": phenotype_map.get(tpmt_pheno, Phenotype.NORMAL),
-            "SLC01B1": phenotype_map.get(slco1b1_pheno, Phenotype.NORMAL),
-            "DPYD": phenotype_map.get(dpyd_pheno, Phenotype.NORMAL),
-        }
-        
-        if st.button("🔍 Check Drug Safety", type="primary", use_container_width=True):
-            if not drug_to_check:
-                st.error("❌ Please select or enter a drug name")
-            else:
-                quick_drug_check(drug_to_check, phenotypes)
+   
     
     # Tab 3: About (renumbered from tab2)
     with tab3:
@@ -532,19 +399,34 @@ def analyze_vcf(uploaded_file, drugs):
             )
         
         with col3:
-            # Copy to clipboard button - uses Streamlit's native copy
+            # Copy to clipboard button using system clipboard
             if st.button("📋 Copy JSON", use_container_width=True):
-                # Create download link with proper encoding
-                b64_json = base64.b64encode(results['json_output'].encode()).decode()
-                st.markdown(f"""
-                <textarea id="copyText" style="display:none;">{results['json_output']}</textarea>
-                <script>
-                const text = document.getElementById('copyText').value;
-                navigator.clipboard.writeText(text);
-                </script>
-                """, unsafe_allow_html=True)
-                st.success("✅ JSON copied to clipboard!")
-                st.code(results['json_output'], language='json')
+                import subprocess
+                import platform
+                
+                try:
+                    # Copy to clipboard using system command
+                    if platform.system() == "Windows":
+                        # Windows: use clip command
+                        process = subprocess.Popen(['clip'], stdin=subprocess.PIPE)
+                        process.communicate(results['json_output'].encode('utf-8'))
+                    elif platform.system() == "Darwin":
+                        # macOS: use pbcopy
+                        process = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
+                        process.communicate(results['json_output'].encode('utf-8'))
+                    else:
+                        # Linux: use xclip or xsel
+                        try:
+                            process = subprocess.Popen(['xclip', '-selection', 'clipboard'], stdin=subprocess.PIPE)
+                            process.communicate(results['json_output'].encode('utf-8'))
+                        except FileNotFoundError:
+                            process = subprocess.Popen(['xsel', '--clipboard', '--input'], stdin=subprocess.PIPE)
+                            process.communicate(results['json_output'].encode('utf-8'))
+                    
+                    st.success("✅ JSON copied to clipboard!")
+                except Exception as e:
+                    st.warning(f"Could not copy to clipboard: {str(e)}")
+                    st.code(results['json_output'], language='json')
     
     except Exception as e:
         st.error(f"❌ Error during analysis: {str(e)}")
@@ -556,177 +438,7 @@ def analyze_vcf(uploaded_file, drugs):
             os.remove(temp_path)
 
 
-def quick_drug_check(drug_name: str, phenotypes: dict):
-    """Quick drug safety check without VCF upload"""
-    try:
-        st.success(f"✅ Analyzing {drug_name}...")
-        st.markdown("---")
-        
-        # Get drug recommendations
-        recommendation = get_drug_recommendations(drug_name, phenotypes)
-        
-        # Display results
-        risk_level = recommendation['risk_level']
-        color_emoji = format_risk_color(risk_level)
-        
-        # Large risk level display
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            if risk_level == "Safe":
-                st.success(f"### {color_emoji} {risk_level}")
-            elif risk_level in ["Adjust Dosage", "Ineffective"]:
-                st.warning(f"### {color_emoji} {risk_level}")
-            else:  # Toxic or Unknown
-                st.error(f"### {color_emoji} {risk_level}")
-        
-        st.markdown("---")
-        
-        # Detailed information
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.markdown("**Clinical Explanation:**")
-            st.info(recommendation['explanation'])
-        
-        with col2:
-            st.markdown("**Dosing Recommendation:**")
-            st.info(recommendation['dosing_recommendation'])
-        
-        st.markdown("---")
-        
-        st.markdown("**Patient Genetic Profile:**")
-        profile_col1, profile_col2, profile_col3 = st.columns(3)
-        
-        with profile_col1:
-            for gene in ["CYP2D6", "CYP2C19", "CYP2C9"]:
-                if gene in phenotypes and phenotypes[gene]:
-                    st.markdown(f"- **{gene}**: {phenotypes[gene].value}")
-        
-        with profile_col2:
-            for gene in ["SLC01B1", "TPMT"]:
-                if gene in phenotypes and phenotypes[gene]:
-                    st.markdown(f"- **{gene}**: {phenotypes[gene].value}")
-        
-        with profile_col3:
-            if "DPYD" in phenotypes and phenotypes["DPYD"]:
-                st.markdown(f"- **DPYD**: {phenotypes['DPYD'].value}")
-        
-        st.markdown("---")
-        
-        # Monitoring information
-        st.markdown("**Monitoring & Safety:**")
-        st.info(recommendation['monitoring'])
-        
-        # JSON export option
-        st.markdown("---")
-        st.markdown("#### 📄 Export Results")
-        
-        # Generate JSON in the new schema format
-        
-        # Map risk level to severity
-        risk_severity_map = {
-            "Safe": "none",
-            "Adjust Dosage": "moderate",
-            "Toxic": "critical",
-            "Ineffective": "high",
-            "Unknown": "none",
-        }
-        
-        severity = risk_severity_map.get(risk_level, "none")
-        confidence = 0.95 if risk_level != "Unknown" else 0.5
-        
-        # Find primary gene
-        primary_gene = None
-        for gene in ["CYP2D6", "CYP2C19", "CYP2C9", "SLC01B1", "TPMT", "DPYD"]:
-            if gene in phenotypes and phenotypes[gene]:
-                primary_gene = gene
-                break
-        
-        # Map phenotype to abbreviation
-        pheno_map = {
-            "Ultra-Rapid Metabolizer": "URM",
-            "Rapid Metabolizer": "RM",
-            "Normal Metabolizer": "NM",
-            "Intermediate Metabolizer": "IM",
-            "Poor Metabolizer": "PM",
-            "No Function": "NF",
-        }
-        
-        primary_phenotype = "Unknown"
-        if primary_gene and phenotypes[primary_gene]:
-            primary_phenotype = pheno_map.get(phenotypes[primary_gene].value, "Unknown")
-        
-        # Generate detected variants list
-        detected_variants = []
-        for gene, pheno in phenotypes.items():
-            if pheno:
-                detected_variants.append({
-                    "rsid": f"rs{hash(gene) % 10000000}",
-                    "gene": gene,
-                    "phenotype": pheno.value,
-                })
-        
-        # Build JSON in new schema
-        patient_id = f"PATIENT_{uuid.uuid4().hex[:8].upper()}"
-        quick_result = {
-            "patient_id": patient_id,
-            "drug": drug_name,
-            "timestamp": datetime.now().isoformat(),
-            "risk_assessment": {
-                "risk_label": risk_level,
-                "confidence_score": confidence,
-                "severity": severity,
-            },
-            "pharmacogenomic_profile": {
-                "primary_gene": primary_gene or "Unknown",
-                "diplotype": "*1/*1",
-                "phenotype": primary_phenotype,
-                "detected_variants": detected_variants,
-            },
-            "clinical_recommendation": {
-                "summary": recommendation['explanation'],
-                "dosing": recommendation['dosing_recommendation'],
-                "monitoring": recommendation['monitoring'],
-            },
-            "llm_generated_explanation": {
-                "summary": f"Based on genetic profile, {drug_name} shows {risk_level.lower()} risk.",
-                "clinical_impact": recommendation['explanation'],
-            },
-            "quality_metrics": {
-                "vcf_parsing_success": False,
-                "genes_analyzed": list(phenotypes.keys()),
-                "variant_count": len([p for p in phenotypes.values() if p]),
-                "data_completeness": "phenotype_only",
-            },
-        }
-        
-        json_str = json.dumps(quick_result, indent=2)
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            st.download_button(
-                label="⬇️ Download JSON",
-                data=json_str,
-                file_name=f"drug_check_{drug_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-                mime="application/json",
-                use_container_width=True
-            )
-        
-        with col2:
-            if st.button("📋 Copy JSON", key="quick_copy", use_container_width=True):
-                st.markdown(f"""
-                <textarea id="copyText2" style="display:none;">{json_str}</textarea>
-                <script>
-                const text = document.getElementById('copyText2').value;
-                navigator.clipboard.writeText(text);
-                </script>
-                """, unsafe_allow_html=True)
-                st.success("✅ JSON copied to clipboard!")
-        
-        st.code(json_str, language='json')
-        
-    except Exception as e:
-        st.error(f"❌ Error during drug check: {str(e)}")
+
 
 
 if __name__ == "__main__":
